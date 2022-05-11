@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import React from 'react';
 
 function Categories({ categories, onClick }) {
-    const [activeCategory, setActiveCategory] = useState(null);
+    const [activeCategory, setActiveCategory] = React.useState(null);
 
     const onSelectCategory = (index) => {
         setActiveCategory(index)
