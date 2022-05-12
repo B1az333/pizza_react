@@ -12,15 +12,11 @@ function SortPopup({sortTypes}) {
     }
 
     const handleOutsideClick = ({path}) => { //event.path
-        // console.log(path.includes(sortRef.current));
-
         if(!path.includes(sortRef.current)) setVisiblePopup(false);
     }
 
     React.useEffect(() => {
         document.body.addEventListener('click', handleOutsideClick);
-        // console.log(sortRef);
-        // console.log(sortTypes);
     }, [])
     
     const onSelectSortPopup = (index) => {
@@ -47,9 +43,6 @@ function SortPopup({sortTypes}) {
             </div>
             {visiblePopup && <div className="sort__popup">
                 <ul>
-                    {/* <li className="active">популярности</li> */}
-                    {/* <li>цене</li> */}
-                    {/* <li>алфавиту</li> */}
                     {sortTypes.map((type, index) => <li onClick={() => onSelectSortPopup(index)} className={classNames({'active' : activeSortPopup === index})} key={`${type}_${index}`}>{type}</li>)}
                 </ul>
             </div>}
