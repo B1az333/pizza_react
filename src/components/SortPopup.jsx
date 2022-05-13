@@ -5,7 +5,7 @@ function SortPopup({sortTypes}) {
     const [visiblePopup, setVisiblePopup] = React.useState(false);
     const [activeSortPopup, setActiveSortPopup] = React.useState(0);
     const sortRef = React.useRef();
-    const activeSort = sortTypes[activeSortPopup];
+    const activeSort = sortTypes[activeSortPopup].name;
 
     const toggleVisiblePopup = () => {
         setVisiblePopup(!visiblePopup);
@@ -43,7 +43,7 @@ function SortPopup({sortTypes}) {
             </div>
             {visiblePopup && <div className="sort__popup">
                 <ul>
-                    {sortTypes.map((type, index) => <li onClick={() => onSelectSortPopup(index)} className={classNames({'active' : activeSortPopup === index})} key={`${type}_${index}`}>{type}</li>)}
+                    {sortTypes.map((typeObj, index) => <li onClick={() => onSelectSortPopup(index)} className={classNames({'active' : activeSortPopup === index})} key={`${typeObj.type}_${index}`}>{typeObj.name}</li>)}
                 </ul>
             </div>}
         </div>
