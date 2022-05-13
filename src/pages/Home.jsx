@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Categories, SortPopup, PizzaBlock } from '../components';
+import { setCategory } from '../redux/slices/filters';
 
 const categories = [
     'Мясные',
@@ -20,16 +21,17 @@ const sortTypes = [
 
 
 function Home() {
-    const {pizzas } = useSelector(({pizzas, filters}) => ({
-        pizzas: pizzas.pizzas, 
-        // sortBy: filters.sortBy 
-    }))
-    console.log( pizzas);
+    const dispatch = useDispatch();
+    const pizzas  = useSelector(({ pizzas }) => pizzas.pizzas);
+
+    const onSelectCategory = React.useCallback((index) => {
+        dispatch(setCategory(index));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className="container">
             <div className="content__top">
-                <Categories onClick={(name) => console.log(name)} categories={categories} />
+                <Categories onClickItem={onSelectCategory} categories={categories} />
                 <SortPopup sortTypes={sortTypes} />
             </div>
             <h2 className="content__title">Все пиццы</h2>

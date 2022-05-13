@@ -9,11 +9,17 @@ import {Home, Cart} from './pages';
 
 function App() {
     const dispatch = useDispatch();
+
+    // window.test = () => {
+    //     axios.get('http://localhost:3000/db.json').then(({data}) => {
+    //             dispatch(setPizzas(data.pizzas));
+    //         })
+    // }
     
     React.useEffect(() => {
         function axiosPizzas() {
-            axios.get('http://localhost:3000/db.json').then(({data}) => {
-                dispatch(setPizzas(data.pizzas));
+            axios.get('http://localhost:3004/pizzas').then(({data}) => {
+                dispatch(setPizzas(data));
             })
         }
         axiosPizzas()

@@ -9,3 +9,6 @@ Launches the test runner in the interactive watch mode.\
 
 ### `npm run build`
 Builds the app for production to the `build` folder.\
+
+### `npm run json-server`
+Runs fake server on port 3004.\

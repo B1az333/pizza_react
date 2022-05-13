@@ -15,6 +15,12 @@ const filtersSlice = createSlice({
                 sortBy: action.payload
             }
         },
+        setCategory(state, action) {
+            return {
+                ...state,
+                category: action.payload
+            }
+        },
 
         // todoAdded(state, action) {
         //     state.push(action.payload);
@@ -34,6 +40,6 @@ const filtersSlice = createSlice({
 
 
 
-export const { setSortBy } = filtersSlice.actions;
+export const { setSortBy, setCategory } = filtersSlice.actions;
 
 export default filtersSlice.reducer;
