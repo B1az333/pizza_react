@@ -10,16 +10,10 @@ const filtersSlice = createSlice({
     initialState,
     reducers: {
         setSortBy(state, action) {
-            return {
-                ...state,
-                sortBy: action.payload
-            }
+            state.sortBy = action.payload;
         },
         setCategory(state, action) {
-            return {
-                ...state,
-                category: action.payload
-            }
+            state.category = action.payload;
         },
 
         // todoAdded(state, action) {

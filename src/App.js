@@ -1,9 +1,9 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { setPizzas } from './redux/slices/pizzas'
+import { fetchPizzas, setPizzas } from './redux/slices/pizzas'
 import {Header} from './components';
 import {Home, Cart} from './pages';
 
@@ -17,12 +17,7 @@ function App() {
     // }
     
     React.useEffect(() => {
-        function axiosPizzas() {
-            axios.get('http://localhost:3004/pizzas').then(({data}) => {
-                dispatch(setPizzas(data));
-            })
-        }
-        axiosPizzas()
+        dispatch(fetchPizzas());
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
