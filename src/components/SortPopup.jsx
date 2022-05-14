@@ -1,12 +1,12 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 const SortPopup = React.memo(
-    function SortPopup({sortTypes}) {
+    function SortPopup({ sortTypes, activeSortPopup, onClickSortPopup }) {
         const [visiblePopup, setVisiblePopup] = React.useState(false);
-        const [activeSortPopup, setActiveSortPopup] = React.useState(0);
         const sortRef = React.useRef();
-        const activeSort = sortTypes[activeSortPopup].name;
+        const activeSort = activeSortPopup.name;
     
         const toggleVisiblePopup = () => {
             setVisiblePopup(!visiblePopup);
@@ -20,8 +20,8 @@ const SortPopup = React.memo(
             document.body.addEventListener('click', handleOutsideClick);
         }, [])
         
-        const onSelectSortPopup = (index) => {
-            setActiveSortPopup(index);
+        const onSelectSortPopup = (sortType) => {
+            onClickSortPopup(sortType);
             setVisiblePopup(false);
         }
     
@@ -44,12 +44,23 @@ const SortPopup = React.memo(
                 </div>
                 {visiblePopup && <div className="sort__popup">
                     <ul>
-                        {sortTypes.map((typeObj, index) => <li onClick={() => onSelectSortPopup(index)} className={classNames({'active' : activeSortPopup === index})} key={`${typeObj.type}_${index}`}>{typeObj.name}</li>)}
+                        {sortTypes.map((typeObj, index) => <li onClick={() => onSelectSortPopup(typeObj)} className={classNames({'active' : activeSortPopup === typeObj})} key={`${typeObj.type}_${index}`}>{typeObj.name}</li>)}
                     </ul>
                 </div>}
             </div>
         );
     }
 )
+
+SortPopup.propTypes = {
+    sortTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
+    activeSortPopup: PropTypes.object.isRequired, 
+    onClickSortPopup: PropTypes.func
+};
+
+SortPopup.defaultProps = {
+    sortTypes: [],
+    activeSortPopup: {}, 
+};
 
 export default SortPopup;

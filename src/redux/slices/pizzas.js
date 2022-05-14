@@ -9,10 +9,10 @@ const initialState = {
 };
 
 const fetchPizzas = createAsyncThunk(
-    'user/fetchAll',
-    async (_, thunkAPI) => {
+    'fetchPizzas',
+    async ({ category, sortBy }, thunkAPI) => {
         try {
-            const response = await axios.get(`${END_POINT}/pizzas`)
+            const response = await axios.get(`${END_POINT}/pizzas?_sort=${sortBy.type === 'popular' ? 'rating&_order=desc' : sortBy.type === 'alphabet' ? `name&_order=asc` : `price&_order=asc`}${category !== null ? `&category=${category}` : ''}`)
             return response.data;
         } catch (e) {
             return thunkAPI.rejectWithValue("Не удалось загрузить пиццы")
@@ -30,15 +30,15 @@ const pizzasSlice = createSlice({
     },
     extraReducers: {
         [fetchPizzas.fulfilled.type]: (state, action) => {
-            state.isLoaded = false;
+            state.isLoaded = true;
             state.error = ''
             state.pizzas = action.payload;
         },
         [fetchPizzas.pending.type]: (state) => {
-            state.isLoaded = true;
+            state.isLoaded = false;
         },
         [fetchPizzas.rejected.type]: (state,  action) => {
-            state.isLoaded = false;
+            state.isLoaded = true;
             state.error = action.payload
         },
     }
