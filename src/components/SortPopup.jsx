@@ -12,7 +12,8 @@ const SortPopup = React.memo(
             setVisiblePopup(!visiblePopup);
         }
     
-        const handleOutsideClick = ({path}) => { //event.path
+        const handleOutsideClick = (event) => { //event.path
+            const path = event.path || (event.composedPath && event.composedPath()); // fixed firefox
             if(!path.includes(sortRef.current)) setVisiblePopup(false);
         }
     
@@ -44,7 +45,7 @@ const SortPopup = React.memo(
                 </div>
                 {visiblePopup && <div className="sort__popup">
                     <ul>
-                        {sortTypes.map((typeObj, index) => <li onClick={() => onSelectSortPopup(typeObj)} className={classNames({'active' : activeSortPopup === typeObj})} key={`${typeObj.type}_${index}`}>{typeObj.name}</li>)}
+                        {sortTypes.map((typeObj, index) => <li onClick={() => onSelectSortPopup(typeObj)} className={classNames({'active' : activeSortPopup.type === typeObj.type})} key={`${typeObj.type}_${index}`}>{typeObj.name}</li>)}
                     </ul>
                 </div>}
             </div>

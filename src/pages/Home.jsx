@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchPizzas } from '../redux/slices/pizzas';
 import { Categories, SortPopup, PizzaBlock, PizzaLoadingBlock } from '../components';
 import { setCategory, setSortBy } from '../redux/slices/filters';
+import { addPizzaCart } from '../redux/slices/cart';
 
 const categories = ['Мясные', 'Вегетерианская', 'Гриль', 'Острые', 'Закрытые'];
 
@@ -19,6 +20,8 @@ function Home() {
     const pizzas = useSelector(({ pizzas }) => pizzas.pizzas);
     const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
     const { category, sortBy } = useSelector(({ filters }) => filters);
+    const addedPizzas = useSelector(({ cart }) => cart.items);
+    // console.log(addedPizzas[345]);
 
     const onSelectCategory = React.useCallback((index) => {
         dispatch(setCategory(index));
@@ -34,6 +37,10 @@ function Home() {
         // }
     }, [category, sortBy]); // eslint-disable-line react-hooks/exhaustive-deps
 
+    const addPizzaToCart = (pizzaObj) => {
+        dispatch(addPizzaCart(pizzaObj));
+    }
+
     return (
         <div className="container">
             <div className="content__top">
@@ -44,7 +51,7 @@ function Home() {
             <div className="content__items">
                 {isLoaded
                     ? pizzas.map((pizza, index) => (
-                          <PizzaBlock {...pizza} key={`${pizza.id}_${index}`} />
+                          <PizzaBlock countAddedTypeOfPizza={addedPizzas[pizza.id]?.length} onClickAddPizza={addPizzaToCart} {...pizza} key={`${pizza.id}_${index}`} />
                       ))
                     : Array(10).fill(0).map((_, index) => <PizzaLoadingBlock key={`${_}_${index}`} />)
                     }
@@ -57,7 +64,7 @@ Home.propTypes = {
     dataPizzas: PropTypes.array.isRequired
 };
 
-Home.defaultProps = { // по дефолту выставляет значения, если те не корректны
+Home.defaultProps = {
     dataPizzas: []
 };
 

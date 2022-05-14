@@ -2,10 +2,12 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import Button from '../Button';
+
 const typeNames = ['тонкое', 'традиционное'];
 const allSizes = [26, 30, 40];
 
-function PizzaBlock({ name, imageUrl, price, sizes, types }) {
+function PizzaBlock({ id, name, imageUrl, price, sizes, types, onClickAddPizza, countAddedTypeOfPizza }) {
 
     const [activeType, setActiveType] = React.useState(types[0]);
     const onSelectType = (index) => {
@@ -17,7 +19,17 @@ function PizzaBlock({ name, imageUrl, price, sizes, types }) {
         setActiveSize(index);
     };
 
-
+    const addPizza = () => {
+        const pizzaObj = {
+            id, 
+            name, 
+            imageUrl, 
+            price, 
+            type: typeNames[activeType], 
+            size: activeSize
+        }
+        onClickAddPizza(pizzaObj)
+    }
 
     return ( 
         <div className="pizza-block">
@@ -41,7 +53,7 @@ function PizzaBlock({ name, imageUrl, price, sizes, types }) {
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от {price} ₴</div>
-                <div className="button button--outline button--add">
+                <Button onClick={addPizza} className="button--add" outline>
                     <svg
                         width="12"
                         height="12"
@@ -54,22 +66,23 @@ function PizzaBlock({ name, imageUrl, price, sizes, types }) {
                         />
                     </svg>
                     <span>Добавить</span>
-                    <i>2</i>
-                </div>
+                    { countAddedTypeOfPizza && <i>{countAddedTypeOfPizza}</i> }
+                </Button>
             </div>
         </div>
     );
 }
 
 PizzaBlock.propTypes = {
-    name: PropTypes.string.isRequired, //исреквайрд означает очень строго,  нул и андефайнд не пройдут
+    name: PropTypes.string.isRequired,
     imageUrl: PropTypes.string.isRequired, 
     price: PropTypes.number.isRequired, 
     sizes: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-    types: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
+    types: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    onClickAddPizza:PropTypes.func,
 };
 
-PizzaBlock.defaultProps = { // по дефолту выставляет значения, если те не корректны
+PizzaBlock.defaultProps = {
     sizes: [], 
     types: []
 };
