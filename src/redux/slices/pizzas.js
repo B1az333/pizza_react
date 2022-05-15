@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const END_POINT = 'http://localhost:3004';
+const END_POINT = 'http://localhost:3000';
 
 const initialState = {
     pizzas: [],

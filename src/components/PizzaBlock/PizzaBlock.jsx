@@ -4,7 +4,7 @@ import React from 'react';
 
 import Button from '../Button';
 
-const typeNames = ['тонкое', 'традиционное'];
+const typeNames = ['тонкое', 'традиционное']; // timely
 const allSizes = [26, 30, 40];
 
 function PizzaBlock({ id, name, imageUrl, price, sizes, types, onClickAddPizza, countAddedTypeOfPizza }) {
@@ -25,7 +25,8 @@ function PizzaBlock({ id, name, imageUrl, price, sizes, types, onClickAddPizza, 
             name, 
             imageUrl, 
             price, 
-            type: typeNames[activeType], 
+            // type: typeNames[activeType], 
+            type: activeType,
             size: activeSize
         }
         onClickAddPizza(pizzaObj)
@@ -66,7 +67,7 @@ function PizzaBlock({ id, name, imageUrl, price, sizes, types, onClickAddPizza, 
                         />
                     </svg>
                     <span>Добавить</span>
-                    { countAddedTypeOfPizza && <i>{countAddedTypeOfPizza}</i> }
+                    { !!countAddedTypeOfPizza && <i>{countAddedTypeOfPizza}</i> }
                 </Button>
             </div>
         </div>

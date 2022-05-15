@@ -21,6 +21,14 @@ function Home() {
     const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
     const { category, sortBy } = useSelector(({ filters }) => filters);
     const addedPizzas = useSelector(({ cart }) => cart.items);
+
+    const countTypePizza = (idPizza) => {
+        let count = 0;
+        Object.keys(addedPizzas).map((key) => {
+            if(addedPizzas[key].id === idPizza) count += addedPizzas[key].count;
+        })
+        return count;
+    }
     // console.log(addedPizzas[345]);
 
     const onSelectCategory = React.useCallback((index) => {
@@ -51,7 +59,7 @@ function Home() {
             <div className="content__items">
                 {isLoaded
                     ? pizzas.map((pizza, index) => (
-                          <PizzaBlock countAddedTypeOfPizza={addedPizzas[pizza.id]?.length} onClickAddPizza={addPizzaToCart} {...pizza} key={`${pizza.id}_${index}`} />
+                          <PizzaBlock countAddedTypeOfPizza={countTypePizza(pizza.id)} onClickAddPizza={addPizzaToCart} {...pizza} key={`${pizza.id}_${index}`} />
                       ))
                     : Array(10).fill(0).map((_, index) => <PizzaLoadingBlock key={`${_}_${index}`} />)
                     }
