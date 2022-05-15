@@ -30,15 +30,13 @@ function Home() {
         dispatch(setSortBy(sortType));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    React.useEffect(() => {
-        // if (!pizzas.length) {
-            dispatch(fetchPizzas({ category, sortBy })); //fix
-        // }
-    }, [category, sortBy]); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const addPizzaToCart = (pizzaObj) => {
+    const addPizzaToCart = React.useCallback((pizzaObj) => {
         dispatch(addPizzaCart(pizzaObj));
-    }
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    React.useEffect(() => {
+        dispatch(fetchPizzas({ category, sortBy }));
+    }, [category, sortBy]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className="container">

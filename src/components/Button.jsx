@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-function Button({ className, outline, children, onClick }) {
+const Button = function Button({ className, outline, children, onClick }) {
     return (
         <button
             onClick={onClick}

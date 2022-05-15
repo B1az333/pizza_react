@@ -12,7 +12,7 @@ const SortPopup = React.memo(
             setVisiblePopup(!visiblePopup);
         }
     
-        const handleOutsideClick = (event) => { //event.path
+        const handleOutsideClick = (event) => {
             const path = event.path || (event.composedPath && event.composedPath()); // fixed firefox
             if(!path.includes(sortRef.current)) setVisiblePopup(false);
         }
