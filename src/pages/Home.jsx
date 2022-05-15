@@ -1,19 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchPizzas } from '../redux/slices/pizzas';
 import { Categories, SortPopup, PizzaBlock, PizzaLoadingBlock } from '../components';
 import { setCategory, setSortBy } from '../redux/slices/filters';
 import { addPizzaCart } from '../redux/slices/cart';
-
-const categories = ['Мясные', 'Вегетерианская', 'Гриль', 'Острые', 'Закрытые'];
-
-const sortTypes = [
-    { name: 'популярности', type: 'popular' },
-    { name: 'цене', type: 'price' },
-    { name: 'алфавиту', type: 'alphabet' },
-];
+import { categories, sortTypes } from '../constants';
 
 function Home() {
     const dispatch = useDispatch();
@@ -29,7 +21,6 @@ function Home() {
         })
         return count;
     }
-    // console.log(addedPizzas[345]);
 
     const onSelectCategory = React.useCallback((index) => {
         dispatch(setCategory(index));
@@ -41,7 +32,7 @@ function Home() {
 
     React.useEffect(() => {
         // if (!pizzas.length) {
-            dispatch(fetchPizzas({ category, sortBy }));
+            dispatch(fetchPizzas({ category, sortBy })); //fix
         // }
     }, [category, sortBy]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -67,13 +58,5 @@ function Home() {
         </div>
     );
 }
-
-Home.propTypes = {
-    dataPizzas: PropTypes.array.isRequired
-};
-
-Home.defaultProps = {
-    dataPizzas: []
-};
 
 export default Home;

@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {Button} from './';
-
-const typeNames = ['тонкое', 'традиционное'];
+import { typeNames } from '../constants';
 
 function CartPizzaBlock({ imageUrl, name, price, size, type, count, onClickDecrementPizza, onClickIncrementPizza, onClickRemovePizza}) {
     return (
@@ -80,5 +80,26 @@ function CartPizzaBlock({ imageUrl, name, price, size, type, count, onClickDecre
         </div>
     );
 }
+
+Button.propTypes = {
+    imageUrl: PropTypes.string.isRequired, 
+    name: PropTypes.string.isRequired, 
+    price: PropTypes.number.isRequired, 
+    size: PropTypes.number.isRequired, 
+    type: PropTypes.number.isRequired, 
+    count: PropTypes.number.isRequired, 
+    onClickDecrementPizza: PropTypes.func, 
+    onClickIncrementPizza: PropTypes.func, 
+    onClickRemovePizza: PropTypes.func, 
+};
+
+Button.defaultProps = {
+    imageUrl: '', 
+    name: '', 
+    price: 0, 
+    size: 26, 
+    type: 0, 
+    count: 0, 
+};
 
 export default CartPizzaBlock;

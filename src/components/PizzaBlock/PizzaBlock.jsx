@@ -2,13 +2,10 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { allSizes, typeNames } from '../../constants';
 import Button from '../Button';
 
-const typeNames = ['тонкое', 'традиционное']; // timely
-const allSizes = [26, 30, 40];
-
 function PizzaBlock({ id, name, imageUrl, price, sizes, types, onClickAddPizza, countAddedTypeOfPizza }) {
-
     const [activeType, setActiveType] = React.useState(types[0]);
     const onSelectType = (index) => {
         setActiveType(index);
@@ -25,7 +22,6 @@ function PizzaBlock({ id, name, imageUrl, price, sizes, types, onClickAddPizza, 
             name, 
             imageUrl, 
             price, 
-            // type: typeNames[activeType], 
             type: activeType,
             size: activeSize
         }
@@ -75,15 +71,21 @@ function PizzaBlock({ id, name, imageUrl, price, sizes, types, onClickAddPizza, 
 }
 
 PizzaBlock.propTypes = {
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     imageUrl: PropTypes.string.isRequired, 
     price: PropTypes.number.isRequired, 
     sizes: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
     types: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-    onClickAddPizza:PropTypes.func,
+    onClickAddPizza:PropTypes.func.isRequired,
+    countAddedTypeOfPizza:PropTypes.number.isRequired
 };
 
 PizzaBlock.defaultProps = {
+    id: 0,
+    name: '',
+    imageUrl: 'url', 
+    price: 0, 
     sizes: [], 
     types: []
 };

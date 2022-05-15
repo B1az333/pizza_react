@@ -4,12 +4,6 @@ import React from 'react';
 
 const Categories = React.memo(
     function Categories({ activeCategory, categories, onClickCategory }) {
-        // const [activeCategory, setActiveCategory] = React.useState(null);
-
-        // console.log(activeCategory);
-    
-        // console.log('rerendeer');
-    
         return (
             <div className="categories">
                 <ul>
@@ -24,7 +18,7 @@ const Categories = React.memo(
 )
 
 Categories.propTypes = {
-    // activeCategory: PropTypes.oneOf([PropTypes.number(), null]), 
+    activeCategory: PropTypes.number, 
     categories: PropTypes.arrayOf(PropTypes.string).isRequired, 
     onClickItem: PropTypes.func
 };

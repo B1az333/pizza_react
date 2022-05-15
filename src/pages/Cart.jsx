@@ -5,13 +5,11 @@ import { Link } from 'react-router-dom';
 import cartEmptyImage from '../assets/img/empty-cart.png';
 import { CartPizzaBlock } from '../components/index';
 import { clearCart, decrementCartPizza, incrementCartPizza, removeCartPizza } from '../redux/slices/cart';
-
-const typeNames = ['тонкое', 'традиционное'];
+import { typeNames } from '../constants';
 
 function Cart() {
     const dispatch = useDispatch();
     const { items, totalCount, totalPrice } = useSelector(({ cart }) => cart);
-    // console.log(items, totalCount, totalPrice);
 
     const onClearCart = () => {
         if (window.confirm('Вы действительно хотите очистить корзину?')) {
@@ -37,10 +35,7 @@ function Cart() {
             dispatch(removeCartPizza(pizzaObjCart));
         }
     };
-    // console.log(totalCount);
 
-    // console.log(Object.keys(items))
-    // console.log(Object.keys(items))
     return (
         <div className="container container--cart">
             {!!totalCount ? (

@@ -13,10 +13,14 @@ function Button({ className, outline, children, onClick }) {
 }
 
 Button.propTypes = {
-    className: PropTypes.string, 
-    outline: PropTypes.bool,
-    // children: PropTypes.array,
+    className: PropTypes.string.isRequired, 
+    outline: PropTypes.bool.isRequired,
     onClick: PropTypes.func
+};
+
+Button.defaultProps = {
+    className: '', 
+    outline: false,
 };
 
 export default Button;
