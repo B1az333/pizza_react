@@ -21,7 +21,7 @@ Builds the app for production to the `build` folder.\
 ### `npm run json-server`
 Runs fake server on port 3004.\
 
-# Работа сайта гифкой
+# Site in GIF's
 
 ![alt text](./src/assets/img/show-cart.gif "show-cart")
 ![alt text](./src/assets/img/show-home.gif "show-home")
