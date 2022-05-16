@@ -2,13 +2,18 @@
 
 [Design](https://www.figma.com/file/wWUnQwvRDWBfPx1v1pCAfO/React-Pizza) by Archakov
 
-# Technology
+# Stack
 
-- HTML
-- SCSS
+- HTML, SCSS
 - Javascript
-- React
+- ReactJS + React Hooks 
 - Redux (with toolkits)
+- React Router
+- json-server
+- axios
+- classnames
+- react-content-loader
+- prop-types
 
 ## Available Scripts
 In the project directory, you can run:
